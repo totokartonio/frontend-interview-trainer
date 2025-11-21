@@ -44,7 +44,9 @@ const Home = () => {
           );
         })}
       </Grid>
-      <Button onClick={handleClick}>Начать урок</Button>
+      <Button onClick={handleClick} aria-label="Начать урок">
+        Начать урок
+      </Button>
     </Stack>
   );
 };
