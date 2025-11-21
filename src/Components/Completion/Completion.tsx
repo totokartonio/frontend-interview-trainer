@@ -1,10 +1,12 @@
 import { Card, Title, Text, Button, Stack, Group } from "@mantine/core";
 import { IconFlame } from "@tabler/icons-react";
 import { useStreak } from "../../hooks/useStreak";
+import { useNavigate } from "@tanstack/react-router";
 
 const Completion = () => {
+  const navigate = useNavigate();
   const { progress } = useStreak();
-  const handleClick = () => alert("Продолжить");
+  const handleClick = () => navigate({ to: "/" });
   return (
     <Stack gap="xl" p="md">
       <Title order={1}>

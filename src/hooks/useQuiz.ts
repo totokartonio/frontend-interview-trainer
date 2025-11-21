@@ -9,6 +9,10 @@ export const useQuiz = (questions: QuizQuestion[]) => {
   const [showExplanation, setShowExplanation] = useState(false);
 
   const selectAnswer = (answerIndex: number) => {
+    if (selectedAnswers[currentQuestionIndex] !== null) {
+      return;
+    }
+
     const newSelectedAnswers = [...selectedAnswers];
     newSelectedAnswers[currentQuestionIndex] = answerIndex;
     setShowExplanation(true);

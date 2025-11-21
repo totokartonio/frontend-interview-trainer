@@ -1,0 +1,289 @@
+{
+  "title": "Frontend Interview Preparation Course",
+  "duration": "24 дня",
+  "daysPerWeek": 5,
+  "totalDays": 24,
+  "weeks": [
+    {
+      "weekNumber": 1,
+      "title": "JavaScript Fundamentals",
+      "days": [
+        {
+          "day": 1,
+          "title": "Типы данных и переменные",
+          "theory": {
+            "topics": [
+              "Примитивные типы данных (string, number, boolean, null, undefined, symbol, bigint)",
+              "Ссылочные типы (object, array, function)",
+              "typeof оператор и его особенности",
+              "var, let, const - различия и области видимости"
+            ],
+            "keyPoints": [
+              "JavaScript динамически типизированный язык",
+              "Разница между примитивами и объектами - передача по значению vs по ссылке",
+              "Hoisting для var, let и const",
+              "Temporal Dead Zone для let и const"
+            ]
+          },
+          "practice": "Напишите функцию, которая принимает значение и возвращает его тип в читаемом формате, корректно обрабатывая null и arrays",
+          "quiz": [
+            {
+              "id": 1,
+              "question": "Что вернёт typeof null?",
+              "options": ["'null'", "'object'", "'undefined'", "Error"],
+              "correctAnswer": 1,
+              "explanation": "typeof null возвращает 'object' - это известная ошибка в JavaScript, которая сохранена для обратной совместимости"
+            },
+            {
+              "id": 2,
+              "question": "В чём главное различие между let и var?",
+              "options": [
+                "let имеет блочную область видимости",
+                "var быстрее работает",
+                "let можно переопределить",
+                "Нет различий"
+              ],
+              "correctAnswer": 0,
+              "explanation": "let имеет блочную область видимости (block scope), в то время как var имеет функциональную область видимости (function scope)"
+            },
+            {
+              "id": 3,
+              "question": "Что произойдёт при выполнении: const arr = [1]; arr.push(2);",
+              "options": [
+                "Ошибка, нельзя изменять const",
+                "Массив станет [1, 2]",
+                "Создастся новый массив",
+                "undefined"
+              ],
+              "correctAnswer": 1,
+              "explanation": "const запрещает переприсваивание переменной, но не запрещает изменение содержимого объектов и массивов"
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "title": "Функции и область видимости",
+          "theory": {
+            "topics": [
+              "Function Declaration vs Function Expression",
+              "Arrow Functions и их особенности",
+              "Замыкания (Closures)",
+              "Лексическое окружение и scope chain"
+            ],
+            "keyPoints": [
+              "Arrow functions не имеют собственного this и arguments",
+              "Замыкание - функция с доступом к переменным внешней области видимости",
+              "IIFE (Immediately Invoked Function Expression) паттерн",
+              "Hoisting для function declaration"
+            ]
+          },
+          "practice": "Создайте функцию-счётчик используя замыкания, которая возвращает объект с методами increment, decrement и getValue",
+          "quiz": [
+            {
+              "id": 4,
+              "question": "Чем arrow function отличается от обычной функции?",
+              "options": [
+                "Не имеет собственного this",
+                "Работает быстрее",
+                "Может быть async",
+                "Ничем не отличается"
+              ],
+              "correctAnswer": 0,
+              "explanation": "Arrow functions не имеют собственного this, arguments, super и new.target. Они наследуют this из окружающего контекста"
+            },
+            {
+              "id": 5,
+              "question": "Что такое замыкание (closure)?",
+              "options": [
+                "Метод закрытия файлов",
+                "Функция с доступом к внешним переменным",
+                "Приватные переменные",
+                "Анонимная функция"
+              ],
+              "correctAnswer": 1,
+              "explanation": "Замыкание - это комбинация функции и лексического окружения, в котором она была объявлена. Функция сохраняет доступ к переменным внешней области видимости"
+            },
+            {
+              "id": 6,
+              "question": "Когда произойдёт hoisting?",
+              "options": [
+                "Только для var",
+                "Для function declaration",
+                "Для let и const",
+                "Для всех переменных и функций"
+              ],
+              "correctAnswer": 1,
+              "explanation": "Function declarations полностью поднимаются вверх. var тоже поднимается, но без инициализации. let/const поднимаются, но находятся в TDZ до объявления"
+            }
+          ]
+        },
+        {
+          "day": 3,
+          "title": "This и контекст выполнения",
+          "theory": {
+            "topics": [
+              "Четыре правила привязки this",
+              "call, apply, bind методы",
+              "this в arrow functions",
+              "this в классах и методах объектов"
+            ],
+            "keyPoints": [
+              "this определяется во время вызова функции, а не объявления",
+              "Приоритет правил: new > explicit binding > implicit binding > default binding",
+              "Arrow functions берут this из лексического окружения",
+              "Strict mode влияет на default binding"
+            ]
+          },
+          "practice": "Реализуйте функцию bind самостоятельно, которая возвращает новую функцию с привязанным контекстом",
+          "quiz": [
+            {
+              "id": 7,
+              "question": "Что будет значением this в arrow function?",
+              "options": [
+                "window/global",
+                "undefined",
+                "this из окружающего контекста",
+                "Сама функция"
+              ],
+              "correctAnswer": 2,
+              "explanation": "Arrow functions не имеют собственного this и наследуют его из внешнего лексического окружения"
+            },
+            {
+              "id": 8,
+              "question": "В чём разница между call и apply?",
+              "options": [
+                "call принимает аргументы списком, apply массивом",
+                "Нет разницы",
+                "apply быстрее",
+                "call для методов, apply для функций"
+              ],
+              "correctAnswer": 0,
+              "explanation": "call принимает аргументы через запятую: func.call(context, arg1, arg2), а apply принимает массив: func.apply(context, [arg1, arg2])"
+            },
+            {
+              "id": 9,
+              "question": "Что делает метод bind?",
+              "options": [
+                "Вызывает функцию немедленно",
+                "Создаёт новую функцию с привязанным this",
+                "Копирует функцию",
+                "Удаляет функцию"
+              ],
+              "correctAnswer": 1,
+              "explanation": "bind() создаёт новую функцию с жёстко привязанным контекстом (this) и опционально с частично применёнными аргументами"
+            }
+          ]
+        },
+        {
+          "day": 4,
+          "title": "Прототипы и наследование",
+          "theory": {
+            "topics": [
+              "[[Prototype]] и __proto__",
+              "Prototype chain",
+              "Object.create, Object.setPrototypeOf",
+              "Методы работы с прототипами"
+            ],
+            "keyPoints": [
+              "Каждый объект имеет внутреннее свойство [[Prototype]]",
+              "При обращении к свойству происходит поиск по цепочке прототипов",
+              "Object.prototype находится в конце цепочки",
+              "__proto__ - устаревший способ доступа к прототипу"
+            ]
+          },
+          "practice": "Создайте цепочку прототипов: Animal -> Dog -> Puppy, где каждый уровень добавляет свои методы",
+          "quiz": [
+            {
+              "id": 10,
+              "question": "Как правильно проверить прототип объекта?",
+              "options": [
+                "obj.__proto__",
+                "Object.getPrototypeOf(obj)",
+                "obj.prototype",
+                "typeof obj"
+              ],
+              "correctAnswer": 1,
+              "explanation": "Object.getPrototypeOf() - современный и рекомендуемый способ получить прототип объекта. __proto__ устарел"
+            },
+            {
+              "id": 11,
+              "question": "Что находится в конце prototype chain?",
+              "options": ["null", "undefined", "Object", "Function"],
+              "correctAnswer": 0,
+              "explanation": "Цепочка прототипов заканчивается на null. Object.prototype.__proto__ === null"
+            },
+            {
+              "id": 12,
+              "question": "Что делает Object.create(proto)?",
+              "options": [
+                "Копирует объект",
+                "Создаёт объект с указанным прототипом",
+                "Удаляет прототип",
+                "Проверяет прототип"
+              ],
+              "correctAnswer": 1,
+              "explanation": "Object.create(proto) создаёт новый объект, у которого [[Prototype]] установлен на переданный объект proto"
+            }
+          ]
+        },
+        {
+          "day": 5,
+          "title": "ES6+ классы",
+          "theory": {
+            "topics": [
+              "Class syntax - синтаксический сахар над прототипами",
+              "Constructor, методы экземпляра и статические методы",
+              "Наследование через extends",
+              "super keyword"
+            ],
+            "keyPoints": [
+              "Классы - это специальные функции",
+              "Методы класса не перечисляемы (non-enumerable)",
+              "Классы всегда в strict mode",
+              "Нельзя вызвать класс без new"
+            ]
+          },
+          "practice": "Создайте иерархию классов для системы фигур (Shape -> Rectangle -> Square) с методами вычисления площади",
+          "quiz": [
+            {
+              "id": 13,
+              "question": "Чем класс отличается от функции-конструктора?",
+              "options": [
+                "Это разные сущности",
+                "Класс - синтаксический сахар",
+                "Класс работает быстрее",
+                "Функции устарели"
+              ],
+              "correctAnswer": 1,
+              "explanation": "Классы в JavaScript - это синтаксический сахар над прототипным наследованием. Под капотом это всё ещё функции"
+            },
+            {
+              "id": 14,
+              "question": "Для чего используется super?",
+              "options": [
+                "Вызов родительского конструктора/методов",
+                "Создание суперкласса",
+                "Удаление класса",
+                "Проверка типа"
+              ],
+              "correctAnswer": 0,
+              "explanation": "super используется для вызова конструктора родительского класса и доступа к методам родителя"
+            },
+            {
+              "id": 15,
+              "question": "Можно ли вызвать класс без new?",
+              "options": [
+                "Да, всегда",
+                "Нет, будет ошибка",
+                "Да, но вернёт undefined",
+                "Зависит от класса"
+              ],
+              "correctAnswer": 1,
+              "explanation": "Вызов класса без оператора new приведёт к TypeError. Это одно из отличий от обычных функций-конструкторов"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

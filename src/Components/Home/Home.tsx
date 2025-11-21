@@ -9,8 +9,10 @@ import {
 } from "@mantine/core";
 import { IconFlame } from "@tabler/icons-react";
 import { useStreak } from "../../hooks/useStreak";
+import { useNavigate } from "@tanstack/react-router";
 
 const Home = () => {
+  const navigate = useNavigate();
   const { progress } = useStreak();
 
   const progressPercent = (progress.completedDays.length / 24) * 100;
@@ -23,7 +25,10 @@ const Home = () => {
   };
 
   const handleClick = () => {
-    alert("Урок начат");
+    navigate({
+      to: "/lesson/$dayId",
+      params: { dayId: String(progress.currentDay) },
+    });
   };
 
   return (

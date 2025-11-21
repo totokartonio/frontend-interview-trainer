@@ -1,12 +1,13 @@
 import { MantineProvider } from "@mantine/core";
 import "@mantine/core/styles.css";
-import Home from "./Components/Home";
+import { RouterProvider } from "@tanstack/react-router";
+import { router } from "./router";
 
 function App() {
   return (
     <MantineProvider>
       <div>
-        <Home />
+        <RouterProvider router={router} />
       </div>
     </MantineProvider>
   );
