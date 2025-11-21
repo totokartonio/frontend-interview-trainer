@@ -35,12 +35,16 @@ const Quiz = ({ questions, onComplete }: QuizProps) => {
   };
 
   const handleComplete = () => {
-    const score = calculateScore();
-    onComplete(score);
     if (!isLastQuestion) {
       nextQuestion();
+      return;
     }
+
+    const score = calculateScore();
+    onComplete(score);
   };
+
+  const isAnswered = selectedAnswers[currentQuestionIndex] !== null;
 
   return (
     <Stack gap="lg" p="md">
@@ -52,11 +56,10 @@ const Quiz = ({ questions, onComplete }: QuizProps) => {
         <Text fw={500}>{currentQuestion.question}</Text>
         <Radio.Group
           value={
-            selectedAnswers[currentQuestionIndex] !== null
-              ? selectedAnswers[currentQuestionIndex]!.toString()
-              : ""
+            isAnswered ? selectedAnswers[currentQuestionIndex]!.toString() : ""
           }
           onChange={(val) => handleChange(Number(val))}
+          disabled={isAnswered}
         >
           {currentQuestion.options.map((option, index) => (
             <Radio
