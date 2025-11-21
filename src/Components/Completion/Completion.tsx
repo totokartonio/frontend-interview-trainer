@@ -1,3 +1,33 @@
-const Completion = () => {};
+import { Card, Title, Text, Button, Stack, Group } from "@mantine/core";
+import { IconFlame } from "@tabler/icons-react";
+import { useStreak } from "../../hooks/useStreak";
+
+const Completion = () => {
+  const { progress } = useStreak();
+  const handleClick = () => alert("Продолжить");
+  return (
+    <Stack gap="xl" p="md">
+      <Title order={1}>
+        {" "}
+        <Group gap="xs" wrap="nowrap" align="center" justify="center">
+          <IconFlame color="orange" size={36} />
+          <Text fw={700}>{progress.streak}</Text>
+        </Group>
+      </Title>
+      <Card shadow="sm" padding="lg" radius="md" withBorder>
+        <Text fw={500} ta="center">
+          Поздравляем!
+        </Text>
+        <Text>
+          Ты успешно завершил урок дня и приближаешься к своей цели. 🎉
+        </Text>
+
+        <Button onClick={handleClick} aria-label="Продолжить">
+          Продолжить
+        </Button>
+      </Card>
+    </Stack>
+  );
+};
 
 export default Completion;
