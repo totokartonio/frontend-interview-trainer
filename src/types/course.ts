@@ -11,8 +11,8 @@ export interface Theory {
   keyPoints: string[];
 }
 
-export interface Day {
-  day: number;
+export interface LessonType {
+  id: number;
   title: string;
   theory: Theory;
   practice: string;
@@ -21,15 +21,15 @@ export interface Day {
 
 export interface Course {
   title: string;
-  days: Day[];
+  lessons: LessonType[];
   duration: string;
-  daysPerWeek: number;
-  totalDays: number;
+  lessonsPerWeek: number;
+  totalLessons: number;
 }
 
 export interface UserProgress {
-  currentDay: number;
+  currentLesson: number;
   streak: number;
-  completedDays: number[];
+  completedLessons: number[];
   lastCompletedDate: string | null;
 }

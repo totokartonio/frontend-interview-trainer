@@ -2,10 +2,12 @@ import { Card, Title, Text, Button, Stack, Group } from "@mantine/core";
 import { IconFlame } from "@tabler/icons-react";
 import { useNavigate } from "@tanstack/react-router";
 import { useProgressStore } from "../../store/progress";
+import { type QuizStats } from "../../types/store";
 
-const Completion = () => {
+const Completion = ({ quizStats }: { quizStats: QuizStats }) => {
   const navigate = useNavigate();
   const streak = useProgressStore((state) => state.streak);
+  const { lastScore, passed } = quizStats;
   const handleClick = () => navigate({ to: "/" });
   return (
     <Stack gap="xl" p="md">
@@ -18,10 +20,15 @@ const Completion = () => {
       </Title>
       <Card shadow="sm" padding="lg" radius="md" withBorder>
         <Text fw={500} ta="center">
-          Поздравляем!
+          {passed ? "Отличная работа!" : "Ой!"}
+        </Text>
+        <Text fw={500} ta="center">
+          {lastScore}%
         </Text>
         <Text>
-          Ты успешно завершил урок дня и приближаешься к своей цели. 🎉
+          {passed
+            ? "Ты успешно завершил урок дня и приближаешься к своей цели. 🎉"
+            : "Что-то пошло не так... Давай повторим урок еще раз?"}
         </Text>
 
         <Button onClick={handleClick} aria-label="Продолжить">

@@ -8,31 +8,33 @@ export const useProgressStore = create<ProgressStore>()(
   persist(
     (set, get) => ({
       course,
-      currentDay: 1,
-      completedDays: [],
+      currentLesson: 1,
+      completedLessons: [],
       quizzes: {},
       streak: 0,
       lastCompletedDate: null,
 
-      saveQuizResult(dayId, score) {
-        const existing = get().quizzes[dayId];
-
+      saveQuizResult(lessonId, score) {
+        const existing = get().quizzes[lessonId];
         const bestScore = existing?.bestScore;
 
         const newBestScore = bestScore >= score ? bestScore : score;
 
         const newQuizzes = {
           ...get().quizzes,
-          [dayId]: {
+          [lessonId]: {
             bestScore: newBestScore,
+            lastScore: score,
             passed: newBestScore >= 0.6,
           },
         };
 
-        const { completedDays, lastCompletedDate, streak } = get();
+        const { completedLessons, currentLesson, lastCompletedDate, streak } =
+          get();
         let newStreak = streak;
         let newLastCompletedDate = lastCompletedDate;
-        let newCompletedDays = completedDays;
+        let newCompletedLessons = completedLessons;
+        let newCurrentLesson = currentLesson;
         const today = dayjs();
         const lastDate = dayjs(lastCompletedDate);
         const daysDiff = today.diff(lastDate, "day");
@@ -45,12 +47,14 @@ export const useProgressStore = create<ProgressStore>()(
             else if (daysDiff > 1) newStreak = 1;
           }
           newLastCompletedDate = today.toISOString();
-          newCompletedDays = [...newCompletedDays, Number(dayId)];
+          newCompletedLessons = [...newCompletedLessons, Number(lessonId)];
+          newCurrentLesson = currentLesson + 1;
         }
 
         set({
           quizzes: newQuizzes,
-          completedDays: newCompletedDays,
+          completedLessons: newCompletedLessons,
+          currentLesson: newCurrentLesson,
           streak: newStreak,
           lastCompletedDate: newLastCompletedDate,
         });

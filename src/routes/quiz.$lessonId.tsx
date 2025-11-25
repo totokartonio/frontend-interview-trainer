@@ -5,25 +5,30 @@ import { useProgressStore } from "../store/progress";
 
 const QuizPage = () => {
   const navigate = useNavigate();
-  const { dayId } = Route.useParams();
+  const { lessonId } = Route.useParams();
 
   const course = useProgressStore((state) => state.course);
   const saveQuizResult = useProgressStore((state) => state.saveQuizResult);
 
-  const day = course.days.find((day) => day.day === Number(dayId));
+  const lesson = course.lessons.find(
+    (lesson) => lesson.id === Number(lessonId)
+  );
 
-  if (!day) return <div>Квиз не найден!</div>;
+  if (!lesson) return <div>Квиз не найден!</div>;
 
-  const questions = day.quiz;
+  const questions = lesson.quiz;
 
   const handleComplete = (score: number) => {
-    saveQuizResult(dayId, score);
-    navigate({ to: "/completion" });
+    saveQuizResult(lessonId, score);
+    navigate({
+      to: "/completion/$lessonId",
+      params: { lessonId: String(lessonId) },
+    });
   };
 
   return <Quiz questions={questions} onComplete={handleComplete} />;
 };
 
-export const Route = createFileRoute("/quiz/$dayId")({
+export const Route = createFileRoute("/quiz/$lessonId")({
   component: QuizPage,
 });

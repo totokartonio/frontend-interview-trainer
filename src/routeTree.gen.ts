@@ -9,75 +9,77 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as CompletionRouteImport } from './routes/completion'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as QuizDayIdRouteImport } from './routes/quiz.$dayId'
-import { Route as LessonDayIdRouteImport } from './routes/lesson.$dayId'
+import { Route as QuizLessonIdRouteImport } from './routes/quiz.$lessonId'
+import { Route as LessonLessonIdRouteImport } from './routes/lesson.$lessonId'
+import { Route as CompletionLessonIdRouteImport } from './routes/completion.$lessonId'
 
-const CompletionRoute = CompletionRouteImport.update({
-  id: '/completion',
-  path: '/completion',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const QuizDayIdRoute = QuizDayIdRouteImport.update({
-  id: '/quiz/$dayId',
-  path: '/quiz/$dayId',
+const QuizLessonIdRoute = QuizLessonIdRouteImport.update({
+  id: '/quiz/$lessonId',
+  path: '/quiz/$lessonId',
   getParentRoute: () => rootRouteImport,
 } as any)
-const LessonDayIdRoute = LessonDayIdRouteImport.update({
-  id: '/lesson/$dayId',
-  path: '/lesson/$dayId',
+const LessonLessonIdRoute = LessonLessonIdRouteImport.update({
+  id: '/lesson/$lessonId',
+  path: '/lesson/$lessonId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CompletionLessonIdRoute = CompletionLessonIdRouteImport.update({
+  id: '/completion/$lessonId',
+  path: '/completion/$lessonId',
   getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/completion': typeof CompletionRoute
-  '/lesson/$dayId': typeof LessonDayIdRoute
-  '/quiz/$dayId': typeof QuizDayIdRoute
+  '/completion/$lessonId': typeof CompletionLessonIdRoute
+  '/lesson/$lessonId': typeof LessonLessonIdRoute
+  '/quiz/$lessonId': typeof QuizLessonIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/completion': typeof CompletionRoute
-  '/lesson/$dayId': typeof LessonDayIdRoute
-  '/quiz/$dayId': typeof QuizDayIdRoute
+  '/completion/$lessonId': typeof CompletionLessonIdRoute
+  '/lesson/$lessonId': typeof LessonLessonIdRoute
+  '/quiz/$lessonId': typeof QuizLessonIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/completion': typeof CompletionRoute
-  '/lesson/$dayId': typeof LessonDayIdRoute
-  '/quiz/$dayId': typeof QuizDayIdRoute
+  '/completion/$lessonId': typeof CompletionLessonIdRoute
+  '/lesson/$lessonId': typeof LessonLessonIdRoute
+  '/quiz/$lessonId': typeof QuizLessonIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/completion' | '/lesson/$dayId' | '/quiz/$dayId'
+  fullPaths:
+    | '/'
+    | '/completion/$lessonId'
+    | '/lesson/$lessonId'
+    | '/quiz/$lessonId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/completion' | '/lesson/$dayId' | '/quiz/$dayId'
-  id: '__root__' | '/' | '/completion' | '/lesson/$dayId' | '/quiz/$dayId'
+  to: '/' | '/completion/$lessonId' | '/lesson/$lessonId' | '/quiz/$lessonId'
+  id:
+    | '__root__'
+    | '/'
+    | '/completion/$lessonId'
+    | '/lesson/$lessonId'
+    | '/quiz/$lessonId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  CompletionRoute: typeof CompletionRoute
-  LessonDayIdRoute: typeof LessonDayIdRoute
-  QuizDayIdRoute: typeof QuizDayIdRoute
+  CompletionLessonIdRoute: typeof CompletionLessonIdRoute
+  LessonLessonIdRoute: typeof LessonLessonIdRoute
+  QuizLessonIdRoute: typeof QuizLessonIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/completion': {
-      id: '/completion'
-      path: '/completion'
-      fullPath: '/completion'
-      preLoaderRoute: typeof CompletionRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/': {
       id: '/'
       path: '/'
@@ -85,18 +87,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/quiz/$dayId': {
-      id: '/quiz/$dayId'
-      path: '/quiz/$dayId'
-      fullPath: '/quiz/$dayId'
-      preLoaderRoute: typeof QuizDayIdRouteImport
+    '/quiz/$lessonId': {
+      id: '/quiz/$lessonId'
+      path: '/quiz/$lessonId'
+      fullPath: '/quiz/$lessonId'
+      preLoaderRoute: typeof QuizLessonIdRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/lesson/$dayId': {
-      id: '/lesson/$dayId'
-      path: '/lesson/$dayId'
-      fullPath: '/lesson/$dayId'
-      preLoaderRoute: typeof LessonDayIdRouteImport
+    '/lesson/$lessonId': {
+      id: '/lesson/$lessonId'
+      path: '/lesson/$lessonId'
+      fullPath: '/lesson/$lessonId'
+      preLoaderRoute: typeof LessonLessonIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/completion/$lessonId': {
+      id: '/completion/$lessonId'
+      path: '/completion/$lessonId'
+      fullPath: '/completion/$lessonId'
+      preLoaderRoute: typeof CompletionLessonIdRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -104,9 +113,9 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  CompletionRoute: CompletionRoute,
-  LessonDayIdRoute: LessonDayIdRoute,
-  QuizDayIdRoute: QuizDayIdRoute,
+  CompletionLessonIdRoute: CompletionLessonIdRoute,
+  LessonLessonIdRoute: LessonLessonIdRoute,
+  QuizLessonIdRoute: QuizLessonIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

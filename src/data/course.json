@@ -1,11 +1,11 @@
 {
   "title": "Frontend Interview Preparation Course",
   "duration": "24 дня",
-  "daysPerWeek": 5,
-  "totalDays": 24,
-  "days": [
+  "lessonsPerWeek": 5,
+  "totalLessons": 24,
+  "lessons": [
     {
-      "day": 1,
+      "id": 1,
       "title": "Типы данных и переменные",
       "theory": {
         "topics": [
@@ -57,7 +57,7 @@
       ]
     },
     {
-      "day": 2,
+      "id": 2,
       "title": "Функции и область видимости",
       "theory": {
         "topics": [
@@ -114,7 +114,7 @@
       ]
     },
     {
-      "day": 3,
+      "id": 3,
       "title": "This и контекст выполнения",
       "theory": {
         "topics": [
@@ -171,7 +171,7 @@
       ]
     },
     {
-      "day": 4,
+      "id": 4,
       "title": "Прототипы и наследование",
       "theory": {
         "topics": [
@@ -223,7 +223,7 @@
       ]
     },
     {
-      "day": 5,
+      "id": 5,
       "title": "ES6+ классы",
       "theory": {
         "topics": [
