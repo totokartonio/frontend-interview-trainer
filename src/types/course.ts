@@ -19,14 +19,9 @@ export interface Day {
   quiz: QuizQuestion[];
 }
 
-export interface Week {
-  weekNumber: number;
-  title: string;
-  days: Day[];
-}
-
 export interface Course {
   title: string;
+  days: Day[];
   duration: string;
   daysPerWeek: number;
   totalDays: number;
