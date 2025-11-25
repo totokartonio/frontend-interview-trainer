@@ -2,13 +2,14 @@ import { type Course } from "./course";
 
 type QuizStats = {
   bestScore: number;
+  lastScore: number;
   passed: boolean;
 };
 
 type ProgressStore = {
   course: Course;
-  currentDay: number;
-  completedDays: number[];
+  currentLesson: number;
+  completedLessons: number[];
   quizzes: Record<string, QuizStats>;
   streak: number;
   lastCompletedDate: string | null;
@@ -16,4 +17,4 @@ type ProgressStore = {
   saveQuizResult: (dayId: string, score: number) => void;
 };
 
-export type { ProgressStore };
+export type { ProgressStore, QuizStats };

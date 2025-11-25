@@ -1,28 +1,33 @@
 import { Card, Title, Text, List, Button, Stack } from "@mantine/core";
-import { type Day } from "../../types/course";
+import { type LessonType } from "../../types/course";
 import { useNavigate } from "@tanstack/react-router";
 
 interface LessonProps {
-  day: Day;
-  onStartQuiz: () => void;
+  lesson: LessonType;
 }
 
-const Lesson = ({ day }: LessonProps) => {
-  const topics = day.theory.topics;
-  const keyPoints = day.theory.keyPoints;
+const Lesson = ({ lesson }: LessonProps) => {
+  const topics = lesson.theory.topics;
+  const keyPoints = lesson.theory.keyPoints;
 
   const navigate = useNavigate();
 
-  const handleClick = () => {
+  const handleForward = () => {
     navigate({
-      to: "/quiz/$dayId",
-      params: { dayId: String(day.day) },
+      to: "/quiz/$lessonId",
+      params: { lessonId: String(lesson.id) },
+    });
+  };
+
+  const handleBack = () => {
+    navigate({
+      to: "/",
     });
   };
 
   return (
     <Stack gap="lg" p="md">
-      <Title order={1}>{day.title}</Title>
+      <Title order={1}>{lesson.title}</Title>
       <Card shadow="sm" padding="lg" radius="md" withBorder>
         <List>
           {topics.map((topic, index) => {
@@ -40,10 +45,13 @@ const Lesson = ({ day }: LessonProps) => {
         </List>
       </Card>
       <Card shadow="sm" padding="lg" radius="md" withBorder>
-        <Text>{day.practice}</Text>
+        <Text>{lesson.practice}</Text>
       </Card>
-      <Button onClick={handleClick} aria-label="Начать квиз">
+      <Button onClick={handleForward} aria-label="Начать квиз">
         Начать квиз
+      </Button>
+      <Button onClick={handleBack} aria-label="Назад" variant="light">
+        Назад
       </Button>
     </Stack>
   );

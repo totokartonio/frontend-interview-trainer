@@ -13,8 +13,8 @@ import { useProgressStore } from "../../store/progress";
 
 const Home = () => {
   const navigate = useNavigate();
-  const completedDays = useProgressStore((state) => state.completedDays);
-  const currentDay = useProgressStore((state) => state.currentDay);
+  const completedDays = useProgressStore((state) => state.completedLessons);
+  const currentLesson = useProgressStore((state) => state.currentLesson);
   const streak = useProgressStore((state) => state.streak);
 
   const progressPercent = (completedDays.length / 24) * 100;
@@ -22,14 +22,14 @@ const Home = () => {
 
   const getDayColor = (dayNumber: number) => {
     if (completedDays.includes(dayNumber)) return "green";
-    if (dayNumber === currentDay) return "blue";
+    if (dayNumber === currentLesson) return "blue";
     return "gray";
   };
 
   const handleClick = () => {
     navigate({
-      to: "/lesson/$dayId",
-      params: { dayId: String(currentDay) },
+      to: "/lesson/$lessonId",
+      params: { lessonId: String(currentLesson) },
     });
   };
 
