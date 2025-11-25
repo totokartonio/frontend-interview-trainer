@@ -8,26 +8,28 @@ import {
   Group,
 } from "@mantine/core";
 import { IconFlame } from "@tabler/icons-react";
-import { useStreak } from "../../hooks/useStreak";
 import { useNavigate } from "@tanstack/react-router";
+import { useProgressStore } from "../../store/progress";
 
 const Home = () => {
   const navigate = useNavigate();
-  const { progress } = useStreak();
+  const completedDays = useProgressStore((state) => state.completedDays);
+  const currentDay = useProgressStore((state) => state.currentDay);
+  const streak = useProgressStore((state) => state.streak);
 
-  const progressPercent = (progress.completedDays.length / 24) * 100;
+  const progressPercent = (completedDays.length / 24) * 100;
   const days = Array.from({ length: 24 }, (_, i) => i + 1);
 
   const getDayColor = (dayNumber: number) => {
-    if (progress.completedDays.includes(dayNumber)) return "green";
-    if (dayNumber === progress.currentDay) return "blue";
+    if (completedDays.includes(dayNumber)) return "green";
+    if (dayNumber === currentDay) return "blue";
     return "gray";
   };
 
   const handleClick = () => {
     navigate({
       to: "/lesson/$dayId",
-      params: { dayId: String(progress.currentDay) },
+      params: { dayId: String(currentDay) },
     });
   };
 
@@ -36,7 +38,7 @@ const Home = () => {
       <Title order={1}>
         <Group gap="xs" wrap="nowrap" align="center" justify="center">
           <IconFlame color="orange" size={36} />
-          <div>{progress.streak}</div>
+          <div>{streak}</div>
         </Group>
       </Title>
       <Progress value={progressPercent} />

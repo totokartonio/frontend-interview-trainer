@@ -1,12 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import Lesson from "../components/Lesson";
-import { useCourseData } from "../hooks/useCourseData";
+import { useProgressStore } from "../store/progress";
 
 const LessonPage = () => {
   const { dayId } = Route.useParams();
-  const { getDayByNumber } = useCourseData();
+  const course = useProgressStore((state) => state.course);
 
-  const day = getDayByNumber(Number(dayId));
+  const day = course.days.find((day) => day.day === Number(dayId));
 
   if (!day) return <div>День не найден!</div>;
 
