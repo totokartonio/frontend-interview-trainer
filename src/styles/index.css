@@ -1,0 +1,10 @@
+:root {
+  --duration-normal: 150ms;
+}
+
+.app {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 24px;
+  min-height: 100vh;
+}

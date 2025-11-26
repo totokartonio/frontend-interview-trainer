@@ -7,14 +7,16 @@ type QuizStats = {
 };
 
 type ProgressStore = {
-  course: Course;
+  lastCompletedDate: string | null;
   currentLesson: number;
   completedLessons: number[];
   quizzes: Record<string, QuizStats>;
   streak: number;
-  lastCompletedDate: string | null;
+  course: Course;
+  freeze: boolean;
 
   saveQuizResult: (dayId: string, score: number) => void;
+  setFreeze: () => void;
 };
 
 export type { ProgressStore, QuizStats };
