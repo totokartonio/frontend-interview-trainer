@@ -7,12 +7,13 @@ import { type ProgressStore } from "../types/store";
 export const useProgressStore = create<ProgressStore>()(
   persist(
     (set, get) => ({
-      course,
+      lastCompletedDate: null,
       currentLesson: 1,
       completedLessons: [],
       quizzes: {},
       streak: 0,
-      lastCompletedDate: null,
+      course,
+      freeze: false,
 
       saveQuizResult(lessonId, score) {
         const existing = get().quizzes[lessonId];
@@ -35,16 +36,16 @@ export const useProgressStore = create<ProgressStore>()(
         let newLastCompletedDate = lastCompletedDate;
         let newCompletedLessons = completedLessons;
         let newCurrentLesson = currentLesson;
-        const today = dayjs();
-        const lastDate = dayjs(lastCompletedDate);
+        const today = dayjs().startOf("day");
+        const lastDate = dayjs(lastCompletedDate).startOf("day");
         const daysDiff = today.diff(lastDate, "day");
 
         if (score >= 0.6 && !existing?.passed) {
           if (!lastCompletedDate) {
             newStreak = 1;
           } else {
-            if (daysDiff === 1) newStreak += 1;
-            else if (daysDiff > 1) newStreak = 1;
+            if (daysDiff <= 2) newStreak += 1;
+            else if (daysDiff > 2) newStreak = 1;
           }
           newLastCompletedDate = today.toISOString();
           newCompletedLessons = [...newCompletedLessons, Number(lessonId)];
@@ -58,6 +59,20 @@ export const useProgressStore = create<ProgressStore>()(
           streak: newStreak,
           lastCompletedDate: newLastCompletedDate,
         });
+      },
+      setFreeze() {
+        let newFreeze = get().freeze;
+        let newLastCompletedDate = get().lastCompletedDate;
+        const today = dayjs().startOf("day");
+        const lastDate = dayjs(newLastCompletedDate).startOf("day");
+        const daysDiff = today.diff(lastDate, "day");
+        if (daysDiff === 2) {
+          newFreeze = true;
+        } else {
+          newFreeze = false;
+        }
+
+        set({ freeze: newFreeze });
       },
     }),
     { name: "progress-storage" }

@@ -1,0 +1,59 @@
+@keyframes streakPop {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.35);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.streak-animate {
+  animation: streakPop 0.7s cubic-bezier(0.36, 1.56, 0.64, 1) both;
+}
+
+.dayBadge {
+  padding: 12px 24px;
+  height: auto;
+}
+
+.gridCard {
+  border: none;
+  color: white;
+  border-radius: var(--mantine-radius-md);
+  padding: 15px 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all var(--duration-normal) ease;
+}
+
+.gridCard:active {
+  transform: translateY(1px);
+}
+
+.completed {
+  background-color: var(--mantine-color-teal-4);
+}
+
+.completed:hover {
+  background-color: var(--mantine-color-teal-5);
+}
+
+.current {
+  background-color: var(--mantine-color-blue-4);
+}
+
+.current:hover {
+  background-color: var(--mantine-color-blue-5);
+}
+
+.locked {
+  background-color: var(--mantine-color-gray-4);
+  color: var(--mantine-color-dark-2);
+}
+.locked:hover {
+  transform: none;
+}
