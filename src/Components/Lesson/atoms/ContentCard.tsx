@@ -23,9 +23,11 @@ const ContentCard = ({ data, variant }: Props) => {
   if (variant === "topics") {
     cardTitle = "Темы урока";
     cardColor = "blue";
+    iconColor = `${cardColor}.4`;
   } else if (variant === "keyPoints") {
     cardTitle = "Ключевые моменты";
     cardColor = "teal";
+    iconColor = `${cardColor}.4`;
   } else {
     cardTitle = "Задание";
     cardColor = "yellow";
