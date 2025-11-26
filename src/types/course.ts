@@ -15,7 +15,7 @@ export interface LessonType {
   id: number;
   title: string;
   theory: Theory;
-  practice: string;
+  practice: string[];
   quiz: QuizQuestion[];
 }
 
