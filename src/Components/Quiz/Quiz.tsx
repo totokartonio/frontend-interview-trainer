@@ -1,15 +1,10 @@
-import {
-  Card,
-  Title,
-  Text,
-  Radio,
-  Button,
-  Alert,
-  Progress,
-  Stack,
-} from "@mantine/core";
+import { useState } from "react";
+import { Card, Text, Button, Stack, UnstyledButton } from "@mantine/core";
 import { useQuiz } from "../../hooks/useQuiz";
 import { type QuizQuestion } from "../../types/course";
+import styles from "./Quiz.module.css";
+import QuestionTitle from "./QuestionTitle";
+import Explanation from "./Explanation";
 
 interface QuizProps {
   questions: QuizQuestion[];
@@ -17,26 +12,26 @@ interface QuizProps {
 }
 
 const Quiz = ({ questions, onComplete }: QuizProps) => {
+  const [value, setValue] = useState<string | null>(null);
+
   const {
     currentQuestion,
     currentQuestionIndex,
-    selectedAnswers,
-    showExplanation,
     isLastQuestion,
     selectAnswer,
     nextQuestion,
     calculateScore,
   } = useQuiz(questions);
 
-  const progressPercent = ((currentQuestionIndex + 1) / questions.length) * 100;
-
-  const handleChange = (index: number) => {
+  const handleChoose = (index: number) => {
+    setValue(index.toString());
     selectAnswer(index);
   };
 
-  const handleComplete = () => {
+  const handleClick = () => {
     if (!isLastQuestion) {
       nextQuestion();
+      setValue(null);
       return;
     }
 
@@ -44,41 +39,43 @@ const Quiz = ({ questions, onComplete }: QuizProps) => {
     onComplete(score);
   };
 
-  const isAnswered = selectedAnswers[currentQuestionIndex] !== null;
+  const checkAnswer = (index: number) => {
+    if (!value) return;
+    if (index === currentQuestion.correctAnswer) return "correctAnswer";
+    if (+value !== index) return "lockedOption";
+    return "wrongAnswer";
+  };
 
   return (
-    <Stack gap="lg" p="md">
-      <Title order={1}>
-        Вопрос {currentQuestionIndex + 1} из {questions.length}
-      </Title>
-      <Progress value={progressPercent} />
-      <Card shadow="sm" padding="lg" radius="md" withBorder>
-        <Text fw={500}>{currentQuestion.question}</Text>
-        <Radio.Group
-          value={
-            isAnswered ? selectedAnswers[currentQuestionIndex]!.toString() : ""
-          }
-          onChange={(val) => handleChange(Number(val))}
-          disabled={isAnswered}
-        >
+    <Card>
+      <Stack gap="md" p="md">
+        <QuestionTitle
+          question={currentQuestion.question}
+          questionIndex={currentQuestionIndex}
+          questionsLength={questions.length}
+        />
+        <Stack gap="md" p="md">
           {currentQuestion.options.map((option, index) => (
-            <Radio
+            <UnstyledButton
               key={`${option}-${index}`}
-              value={index.toString()}
-              label={option}
-            />
+              className={`${styles.option} ${styles[`${checkAnswer(index)}`]}`}
+              onClick={() => handleChoose(index)}
+              disabled={!!value}
+            >
+              <Text fz="md">{option}</Text>
+            </UnstyledButton>
           ))}
-        </Radio.Group>
-        {showExplanation && (
-          <Alert title="Объяснение" color="blue" mt="md">
-            {currentQuestion.explanation}
-          </Alert>
+        </Stack>
+        {value && (
+          <>
+            <Explanation text={currentQuestion.explanation} />
+            <Button onClick={handleClick}>
+              {isLastQuestion ? "Завершить" : "Следующий вопрос"}
+            </Button>
+          </>
         )}
-        <Button onClick={handleComplete}>
-          {isLastQuestion ? "Завершить" : "Следующий вопрос"}
-        </Button>
-      </Card>
-    </Stack>
+      </Stack>
+    </Card>
   );
 };
 
