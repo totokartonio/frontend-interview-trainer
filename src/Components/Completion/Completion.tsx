@@ -1,41 +1,33 @@
-import { Card, Title, Text, Button, Stack, Group } from "@mantine/core";
-import { IconFlame } from "@tabler/icons-react";
+import { Card, Text, Button, Stack } from "@mantine/core";
 import { useNavigate } from "@tanstack/react-router";
 import { useProgressStore } from "../../store/progress";
 import { type QuizStats } from "../../types/store";
+import CompletionHeader from "./atoms/CompletionHeader";
 
 const Completion = ({ quizStats }: { quizStats: QuizStats }) => {
   const navigate = useNavigate();
   const streak = useProgressStore((state) => state.streak);
-  const { lastScore, passed } = quizStats;
+  const { lastScore } = quizStats;
+  const passed = lastScore > 60;
   const handleClick = () => navigate({ to: "/" });
   return (
-    <Stack gap="xl" p="md">
-      <Title order={1}>
-        {" "}
-        <Group gap="xs" wrap="nowrap" align="center" justify="center">
-          <IconFlame color="orange" size={36} />
-          <Text fw={700}>{streak}</Text>
-        </Group>
-      </Title>
-      <Card shadow="sm" padding="lg" radius="md" withBorder>
-        <Text fw={500} ta="center">
-          {passed ? "Отличная работа!" : "Ой!"}
-        </Text>
-        <Text fw={500} ta="center">
+    <Card shadow="sm" padding="xl" radius="md" withBorder>
+      <Stack gap="xl" p="xl">
+        <CompletionHeader streak={streak} passed={passed} />
+        <Text fw={500} fz={32} ta="center" c={passed ? "teal" : "red.8"}>
           {lastScore}%
         </Text>
-        <Text>
+        <Text ta="center" fz={20} c="dark.4">
           {passed
-            ? "Ты успешно завершил урок дня и приближаешься к своей цели. 🎉"
+            ? "Ты успешно завершил урок и приближаешься к своей цели!"
             : "Что-то пошло не так... Давай повторим урок еще раз?"}
         </Text>
 
-        <Button onClick={handleClick} aria-label="Продолжить">
+        <Button onClick={handleClick} aria-label="Продолжить" size="xl">
           Продолжить
         </Button>
-      </Card>
-    </Stack>
+      </Stack>
+    </Card>
   );
 };
 

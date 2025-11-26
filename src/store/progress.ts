@@ -17,6 +17,7 @@ export const useProgressStore = create<ProgressStore>()(
 
       saveQuizResult(lessonId, score) {
         const existing = get().quizzes[lessonId];
+        const freeze = get().freeze;
         const bestScore = existing?.bestScore;
 
         const newBestScore = bestScore >= score ? bestScore : score;
@@ -44,8 +45,13 @@ export const useProgressStore = create<ProgressStore>()(
           if (!lastCompletedDate) {
             newStreak = 1;
           } else {
-            if (daysDiff <= 2) newStreak += 1;
-            else if (daysDiff > 2) newStreak = 1;
+            if (daysDiff < 1) {
+              newStreak = streak;
+            } else if (daysDiff === 1 || (freeze && daysDiff <= 2)) {
+              newStreak += 1;
+            } else {
+              newStreak = 1;
+            }
           }
           newLastCompletedDate = today.toISOString();
           newCompletedLessons = [...newCompletedLessons, Number(lessonId)];
