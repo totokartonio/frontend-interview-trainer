@@ -14,14 +14,14 @@ const CourseHeader = ({ title, streak, freeze }: Props) => {
       <Title order={1}>{title}</Title>
       <Badge
         className={`${streak > 0 && !freeze ? styles["streak-animate"] : ""} ${styles.dayBadge}`}
-        color="badge-orange"
+        color={freeze ? "blue.1" : "orange.1"}
         autoContrast
       >
         <Group gap="5" wrap="nowrap" align="center" justify="center">
           {freeze ? (
-            <IconSnowflake color="LightSkyBlue" size={36} />
+            <IconSnowflake className={styles.snowIcon} size={36} />
           ) : (
-            <IconFlame color="orange" size={36} />
+            <IconFlame className={styles.flameIcon} size={36} />
           )}
           <Text size="20" fw={700} lh="h1">
             {streak}

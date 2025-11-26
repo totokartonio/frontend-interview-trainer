@@ -19,6 +19,14 @@
   height: auto;
 }
 
+.flameIcon {
+  color: var(--mantine-color-orange-6);
+}
+
+.snowIcon {
+  color: var(--mantine-color-blue-4);
+}
+
 .gridCard {
   border: none;
   color: white;
