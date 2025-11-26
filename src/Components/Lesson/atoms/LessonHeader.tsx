@@ -9,7 +9,7 @@ const LessonHeader = ({ id, title }: Props) => {
   return (
     <Stack gap="xs">
       <Text size="14" lh="1.7" c="gray.6" tt="uppercase">
-        День {id}
+        Урок {id}
       </Text>
       <Title order={1} lh={1.2}>
         {title}
