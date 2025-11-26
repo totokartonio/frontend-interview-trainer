@@ -1,0 +1,14 @@
+.topics {
+  background-color: var(--mantine-color-blue-0);
+  border-color: var(--mantine-color-blue-2);
+}
+
+.keyPoints {
+  background-color: var(--mantine-color-teal-0);
+  border-color: var(--mantine-color-teal-2);
+}
+
+.practice {
+  background-color: var(--mantine-color-yellow-0);
+  border-color: var(--mantine-color-yellow-2);
+}

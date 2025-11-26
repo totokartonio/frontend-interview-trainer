@@ -15,7 +15,7 @@ type ProgressStore = {
   course: Course;
   freeze: boolean;
 
-  saveQuizResult: (dayId: string, score: number) => void;
+  saveQuizResult: (lessonId: string, score: number) => void;
   setFreeze: () => void;
 };
 
