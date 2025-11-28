@@ -14,7 +14,7 @@ const CompletionHeader = ({ streak, passed }: Props) => {
         {passed ? "Отличная работа!" : "Ой!"}
       </Title>
       <Badge
-        className={`${styles["streak-animate"]} ${styles.dayBadge}`}
+        className={`streak-animate ${styles.dayBadge}`}
         color={passed ? "orange.1" : "pink.1"}
         autoContrast
       >

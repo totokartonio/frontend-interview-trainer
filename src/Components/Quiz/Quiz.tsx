@@ -68,6 +68,9 @@ const Quiz = ({ questions, onComplete }: QuizProps) => {
               className={`${styles.option} ${styles[`${checkAnswer(id)}`]}`}
               onClick={() => handleChoose(id)}
               disabled={!!value}
+              aria-label={opt}
+              aria-checked={value === id}
+              role="radio"
             >
               <Text fz="md">{opt}</Text>
             </UnstyledButton>

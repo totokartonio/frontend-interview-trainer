@@ -1,17 +1,21 @@
 import { createFileRoute } from "@tanstack/react-router";
 import Completion from "../components/Completion";
 import { useProgressStore } from "../store/progress";
-import guard from "../utils/guard";
+import canAccessLesson from "../utils/canAccessLesson";
+import NotFound from "../components/NotFound.tsx";
 
 const CompletionPage = () => {
   const { lessonId } = Route.useParams();
   const quizzes = useProgressStore((state) => state.quizzes);
+  const currentLesson = useProgressStore((state) => state.currentLesson);
 
   const quizStats = quizzes[lessonId];
-  const check = guard(lessonId);
+  const check = canAccessLesson(Number(lessonId), currentLesson);
 
-  if (!quizStats) return <div>Урок не найден!</div>;
-  if (!check) return <div>Этот урок еще не открыт!</div>;
+  if (!check || !quizStats) {
+    const errorMessage = "Урок недоступен!";
+    return <NotFound message={errorMessage} />;
+  }
 
   return <Completion quizStats={quizStats} />;
 };
