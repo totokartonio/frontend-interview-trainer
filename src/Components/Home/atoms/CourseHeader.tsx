@@ -13,7 +13,7 @@ const CourseHeader = ({ title, streak, freeze }: Props) => {
     <Stack gap="lg" align="center">
       <Title order={1}>{title}</Title>
       <Badge
-        className={`${streak > 0 && !freeze ? styles["streak-animate"] : ""} ${styles.dayBadge}`}
+        className={`${streak > 0 && !freeze ? "streak-animate" : ""} ${styles.dayBadge}`}
         color={freeze ? "blue.1" : "orange.1"}
         autoContrast
       >
