@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { Card, Text, Button, Stack, UnstyledButton } from "@mantine/core";
-import { useQuiz } from "../../hooks/useQuiz";
 import { type QuizQuestion } from "../../types/course";
 import styles from "./Quiz.module.css";
-import QuestionTitle from "./QuestionTitle";
-import Explanation from "./Explanation";
+import QuestionTitle from "./atoms/QuestionTitle";
+import Explanation from "./atoms/Explanation";
 
 interface QuizProps {
   questions: QuizQuestion[];
@@ -13,36 +12,39 @@ interface QuizProps {
 
 const Quiz = ({ questions, onComplete }: QuizProps) => {
   const [value, setValue] = useState<string | null>(null);
+  const [score, setScore] = useState<number>(0);
+  const [questionIndex, setQuestionIndex] = useState<number>(0);
 
-  const {
-    currentQuestion,
-    currentQuestionIndex,
-    isLastQuestion,
-    selectAnswer,
-    nextQuestion,
-    calculateScore,
-  } = useQuiz(questions);
+  const currentQuestion = questions[questionIndex];
+  const isLastQuestion = questionIndex === questions.length - 1;
 
-  const handleChoose = (index: number) => {
-    setValue(index.toString());
-    selectAnswer(index);
+  const handleChoose = (id: string) => {
+    console.log(id);
+    setValue(id);
   };
 
   const handleClick = () => {
+    let newScore = score;
+    if (value === currentQuestion.correctAnswer) {
+      newScore += 1;
+      setScore(newScore);
+    }
     if (!isLastQuestion) {
-      nextQuestion();
+      const newQuestionIndex = questionIndex;
+      setQuestionIndex(newQuestionIndex + 1);
       setValue(null);
       return;
     }
 
-    const score = calculateScore();
-    onComplete(score);
+    const scorePercent = Math.round((newScore / questions.length) * 100);
+    onComplete(scorePercent);
+    setScore(0);
   };
 
-  const checkAnswer = (index: number) => {
+  const checkAnswer = (id: string) => {
     if (!value) return;
-    if (index === currentQuestion.correctAnswer) return "correctAnswer";
-    if (+value !== index) return "lockedOption";
+    if (id === currentQuestion.correctAnswer) return "correctAnswer";
+    if (id !== value) return "lockedOption";
     return "wrongAnswer";
   };
 
@@ -51,18 +53,23 @@ const Quiz = ({ questions, onComplete }: QuizProps) => {
       <Stack gap="md" p="md">
         <QuestionTitle
           question={currentQuestion.question}
-          questionIndex={currentQuestionIndex}
+          questionIndex={questionIndex}
           questionsLength={questions.length}
         />
-        <Stack gap="md" p="md">
-          {currentQuestion.options.map((option, index) => (
+        <Stack
+          gap="md"
+          p="md"
+          key={questionIndex}
+          className={styles.questionCard}
+        >
+          {currentQuestion.options.map(({ id, opt }) => (
             <UnstyledButton
-              key={`${option}-${index}`}
-              className={`${styles.option} ${styles[`${checkAnswer(index)}`]}`}
-              onClick={() => handleChoose(index)}
+              key={id}
+              className={`${styles.option} ${styles[`${checkAnswer(id)}`]}`}
+              onClick={() => handleChoose(id)}
               disabled={!!value}
             >
-              <Text fz="md">{option}</Text>
+              <Text fz="md">{opt}</Text>
             </UnstyledButton>
           ))}
         </Stack>

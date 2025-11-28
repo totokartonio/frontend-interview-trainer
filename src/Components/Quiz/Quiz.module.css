@@ -50,3 +50,18 @@
     transform: translateY(0);
   }
 }
+
+.questionCard {
+  animation: quizFadeInUp 0.3s ease-out;
+}
+
+@keyframes quizFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateX(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

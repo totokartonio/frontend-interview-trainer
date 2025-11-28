@@ -1,6 +1,6 @@
 import { Alert, Text } from "@mantine/core";
 import { IconInfoCircle } from "@tabler/icons-react";
-import styles from "./Quiz.module.css";
+import styles from "../Quiz.module.css";
 
 type Props = {
   text: string;
