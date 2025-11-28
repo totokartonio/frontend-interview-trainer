@@ -3,6 +3,7 @@ import { type LessonType } from "../../types/course";
 import { useNavigate } from "@tanstack/react-router";
 import LessonHeader from "./atoms/LessonHeader";
 import ContentCard from "./atoms/ContentCard";
+import MarkdownCard from "./atoms/MarkDownCard";
 
 interface LessonProps {
   lesson: LessonType;
@@ -33,6 +34,7 @@ const Lesson = ({ lesson }: LessonProps) => {
         <LessonHeader id={lesson.id} title={lesson.title} />
         <ContentCard data={topics} variant="topics" />
         <ContentCard data={keyPoints} variant="keyPoints" />
+        <MarkdownCard data={lesson.theory.content} />
         <ContentCard data={lesson.practice} variant="practice" />
         <Button onClick={handleForward} aria-label="Начать квиз">
           Начать квиз

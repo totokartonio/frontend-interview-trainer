@@ -1,14 +1,20 @@
+export interface Option {
+  id: string;
+  opt: string;
+}
+
 export interface QuizQuestion {
   id: number;
   question: string;
-  options: string[];
-  correctAnswer: number;
+  options: Option[];
+  correctAnswer: string;
   explanation: string;
 }
 
 export interface Theory {
   topics: string[];
   keyPoints: string[];
+  content: string;
 }
 
 export interface LessonType {

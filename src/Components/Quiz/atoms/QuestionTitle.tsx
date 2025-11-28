@@ -13,7 +13,7 @@ const QuestionTitle = ({ question, questionIndex, questionsLength }: Props) => {
       <Text size="14" lh="1.7" c="gray.6" tt="uppercase">
         Вопрос {questionIndex + 1} из {questionsLength}
       </Text>
-      <Progress value={progressPercent} />
+      <Progress value={progressPercent} transitionDuration={400} />
       <Title order={1} fz="h3">
         {question}
       </Title>
