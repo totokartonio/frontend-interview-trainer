@@ -3,7 +3,7 @@ import { type LessonType } from "../../types/course";
 import { useNavigate } from "@tanstack/react-router";
 import LessonHeader from "./atoms/LessonHeader";
 import ContentCard from "./atoms/ContentCard";
-import MarkdownCard from "./atoms/MarkDownCard";
+import MarkdownCard from "./atoms/MarkdownCard";
 
 interface LessonProps {
   lesson: LessonType;
