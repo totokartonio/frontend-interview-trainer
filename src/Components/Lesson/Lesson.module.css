@@ -12,3 +12,11 @@
   background-color: var(--mantine-color-yellow-0);
   border-color: var(--mantine-color-yellow-2);
 }
+
+.codeBlock {
+  background-color: var(--mantine-color-gray-2);
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-family: monospace;
+  overflow-x: auto;
+}

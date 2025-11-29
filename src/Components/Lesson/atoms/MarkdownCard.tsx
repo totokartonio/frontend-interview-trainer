@@ -1,4 +1,4 @@
-import { Card, Stack, Group, ThemeIcon, Title } from "@mantine/core";
+import { Card, Stack, Group, ThemeIcon, Title, Code } from "@mantine/core";
 import Markdown from "react-markdown";
 import { IconFileText } from "@tabler/icons-react";
 import styles from "../Lesson.module.css";
@@ -28,17 +28,7 @@ const MarkdownCard = ({ data }: Props) => {
               <li style={{ marginBottom: 8 }} {...props} />
             ),
             code: ({ node, className, children, ...props }) => (
-              <code
-                style={{
-                  backgroundColor: "#f5f5f5",
-                  padding: "2px 6px",
-                  borderRadius: 4,
-                  fontFamily: "monospace",
-                }}
-                {...props}
-              >
-                {children}
-              </code>
+              <Code block>{children}</Code>
             ),
           }}
         >
