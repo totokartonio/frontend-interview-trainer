@@ -19,11 +19,19 @@ const CourseHeader = ({ title, streak, freeze }: Props) => {
       >
         <Group gap="5" wrap="nowrap" align="center" justify="center">
           {freeze ? (
-            <IconSnowflake className={styles.snowIcon} size={36} />
+            <IconSnowflake
+              className={styles.snowIcon}
+              size={36}
+              data-testid="freeze"
+            />
           ) : (
-            <IconFlame className={styles.flameIcon} size={36} />
+            <IconFlame
+              className={styles.flameIcon}
+              size={36}
+              data-testid="flame"
+            />
           )}
-          <Text size="20" fw={700} lh="h1">
+          <Text size="20" fw={700} lh="h1" data-testid="streak">
             {streak}
           </Text>
         </Group>
