@@ -35,6 +35,7 @@ export const useProgressStore = create<ProgressStore>()(
         const { completedLessons, currentLesson, lastCompletedDate, streak } =
           get();
         let newStreak = streak;
+        let newFreeze = freeze;
         let newLastCompletedDate = lastCompletedDate;
         let newCompletedLessons = completedLessons;
         let newCurrentLesson = currentLesson;
@@ -48,8 +49,11 @@ export const useProgressStore = create<ProgressStore>()(
           } else {
             if (daysDiff < 1) {
               newStreak = streak;
-            } else if (daysDiff === 1 || freeze) {
+            } else if (daysDiff === 1) {
               newStreak += 1;
+            } else if (freeze && daysDiff === FREEZE_WINDOW) {
+              newStreak += 1;
+              newFreeze = false;
             } else {
               newStreak = 1;
             }
@@ -64,6 +68,7 @@ export const useProgressStore = create<ProgressStore>()(
           completedLessons: newCompletedLessons,
           currentLesson: newCurrentLesson,
           streak: newStreak,
+          freeze: newFreeze,
           lastCompletedDate: newLastCompletedDate,
         });
       },
