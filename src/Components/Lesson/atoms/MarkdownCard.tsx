@@ -27,9 +27,7 @@ const MarkdownCard = ({ data }: Props) => {
             li: ({ node, ...props }) => (
               <li style={{ marginBottom: 8 }} {...props} />
             ),
-            code: ({ node, className, children, ...props }) => (
-              <Code block>{children}</Code>
-            ),
+            code: ({ children }) => <Code block>{children}</Code>,
           }}
         >
           {data}

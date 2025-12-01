@@ -9,11 +9,17 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ErrorRouteImport } from './routes/error'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as QuizLessonIdRouteImport } from './routes/quiz.$lessonId'
 import { Route as LessonLessonIdRouteImport } from './routes/lesson.$lessonId'
 import { Route as CompletionLessonIdRouteImport } from './routes/completion.$lessonId'
 
+const ErrorRoute = ErrorRouteImport.update({
+  id: '/error',
+  path: '/error',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -37,12 +43,14 @@ const CompletionLessonIdRoute = CompletionLessonIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/error': typeof ErrorRoute
   '/completion/$lessonId': typeof CompletionLessonIdRoute
   '/lesson/$lessonId': typeof LessonLessonIdRoute
   '/quiz/$lessonId': typeof QuizLessonIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/error': typeof ErrorRoute
   '/completion/$lessonId': typeof CompletionLessonIdRoute
   '/lesson/$lessonId': typeof LessonLessonIdRoute
   '/quiz/$lessonId': typeof QuizLessonIdRoute
@@ -50,6 +58,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/error': typeof ErrorRoute
   '/completion/$lessonId': typeof CompletionLessonIdRoute
   '/lesson/$lessonId': typeof LessonLessonIdRoute
   '/quiz/$lessonId': typeof QuizLessonIdRoute
@@ -58,14 +67,21 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/error'
     | '/completion/$lessonId'
     | '/lesson/$lessonId'
     | '/quiz/$lessonId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/completion/$lessonId' | '/lesson/$lessonId' | '/quiz/$lessonId'
+  to:
+    | '/'
+    | '/error'
+    | '/completion/$lessonId'
+    | '/lesson/$lessonId'
+    | '/quiz/$lessonId'
   id:
     | '__root__'
     | '/'
+    | '/error'
     | '/completion/$lessonId'
     | '/lesson/$lessonId'
     | '/quiz/$lessonId'
@@ -73,6 +89,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ErrorRoute: typeof ErrorRoute
   CompletionLessonIdRoute: typeof CompletionLessonIdRoute
   LessonLessonIdRoute: typeof LessonLessonIdRoute
   QuizLessonIdRoute: typeof QuizLessonIdRoute
@@ -80,6 +97,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/error': {
+      id: '/error'
+      path: '/error'
+      fullPath: '/error'
+      preLoaderRoute: typeof ErrorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -113,6 +137,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ErrorRoute: ErrorRoute,
   CompletionLessonIdRoute: CompletionLessonIdRoute,
   LessonLessonIdRoute: LessonLessonIdRoute,
   QuizLessonIdRoute: QuizLessonIdRoute,

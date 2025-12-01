@@ -1,25 +1,33 @@
 import { createFileRoute } from "@tanstack/react-router";
 import Completion from "../components/Completion";
 import { useProgressStore } from "../store/progress";
-import canAccessLesson from "../utils/canAccessLesson";
-import NotFound from "../components/NotFound.tsx";
+import loadOrRedirect from "../utils/loadOrRedirect.ts";
 
 const CompletionPage = () => {
-  const { lessonId } = Route.useParams();
+  const { lesson } = Route.useLoaderData();
   const quizzes = useProgressStore((state) => state.quizzes);
-  const currentLesson = useProgressStore((state) => state.currentLesson);
 
-  const quizStats = quizzes[lessonId];
-  const check = canAccessLesson(Number(lessonId), currentLesson);
-
-  if (!check || !quizStats) {
-    const errorMessage = "Урок недоступен!";
-    return <NotFound message={errorMessage} />;
-  }
+  const quizStats = quizzes[String(lesson.id)];
 
   return <Completion quizStats={quizStats} />;
 };
 
 export const Route = createFileRoute("/completion/$lessonId")({
   component: CompletionPage,
+  loader: ({ params }) => {
+    const lessonId = Number(params.lessonId);
+    const { course, currentLesson, quizzes } = useProgressStore.getState();
+    const lesson = course.lessons.find((lesson) => lesson.id === lessonId);
+
+    const safeLesson = loadOrRedirect({
+      id: lessonId,
+      currentLesson,
+      totalLessons: course.totalLessons,
+      lesson,
+      completion: true,
+      quizStats: quizzes[lessonId],
+    });
+
+    return { lesson: safeLesson };
+  },
 });
