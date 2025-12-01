@@ -25,6 +25,8 @@ const LessonsGrid = ({ days }: Props) => {
             <UnstyledButton
               className={`${styles.gridCard} ${styles[getDayClass(day)]}`}
               key={day}
+              data-testid={`lesson-${day}`}
+              data-label={getDayClass(day)}
               disabled={getDayClass(day) === "locked"}
               onClick={() => navigate({ to: `/lesson/${day}` })}
             >

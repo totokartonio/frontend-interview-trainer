@@ -22,7 +22,7 @@ const CompletionHeader = ({ streak, passed }: Props) => {
           {passed ? (
             <>
               <IconFlame className={styles.flameIcon} size={36} />
-              <Text fw={700} size="20" lh="h1">
+              <Text fw={700} size="20" lh="h1" data-testid="streak">
                 {streak}
               </Text>
             </>

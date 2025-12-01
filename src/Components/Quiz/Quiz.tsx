@@ -93,6 +93,7 @@ const Quiz = ({ questions, onComplete }: QuizProps) => {
             <UnstyledButton
               key={id}
               className={`${styles.option} ${styles[`${checkAnswer(id)}`]}`}
+              data-label={checkAnswer(id)}
               onClick={() => handleChoose(id)}
               disabled={!!state.selectedAnswer}
               aria-label={opt}
