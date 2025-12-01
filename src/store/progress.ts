@@ -3,6 +3,7 @@ import { persist } from "zustand/middleware";
 import course from "../data/course.json";
 import dayjs from "dayjs";
 import { type ProgressStore } from "../types/store";
+import { FREEZE_WINDOW, ACCEPTANCE_SCORE } from "../data/constants";
 
 export const useProgressStore = create<ProgressStore>()(
   persist(
@@ -27,7 +28,7 @@ export const useProgressStore = create<ProgressStore>()(
           [lessonId]: {
             bestScore: newBestScore,
             lastScore: score,
-            passed: newBestScore >= 0.6,
+            passed: newBestScore >= ACCEPTANCE_SCORE,
           },
         };
 
@@ -41,13 +42,13 @@ export const useProgressStore = create<ProgressStore>()(
         const lastDate = dayjs(lastCompletedDate).startOf("day");
         const daysDiff = today.diff(lastDate, "day");
 
-        if (score >= 0.6 && !existing?.passed) {
+        if (score >= ACCEPTANCE_SCORE && !existing?.passed) {
           if (!lastCompletedDate) {
             newStreak = 1;
           } else {
             if (daysDiff < 1) {
               newStreak = streak;
-            } else if (daysDiff === 1 || (freeze && daysDiff <= 2)) {
+            } else if (daysDiff === 1 || freeze) {
               newStreak += 1;
             } else {
               newStreak = 1;
@@ -72,7 +73,7 @@ export const useProgressStore = create<ProgressStore>()(
         const today = dayjs().startOf("day");
         const lastDate = dayjs(newLastCompletedDate).startOf("day");
         const daysDiff = today.diff(lastDate, "day");
-        if (daysDiff === 2) {
+        if (daysDiff === FREEZE_WINDOW) {
           newFreeze = true;
         } else {
           newFreeze = false;

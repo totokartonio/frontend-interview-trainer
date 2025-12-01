@@ -4,6 +4,7 @@ import { useProgressStore } from "../../store/progress";
 import CourseHeader from "./atoms/CourseHeader";
 import ProgressCard from "./atoms/ProgressCard";
 import LessonsGrid from "./atoms/LessonsGrid";
+import { useEffect } from "react";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ const Home = () => {
   const setFreeze = useProgressStore((state) => state.setFreeze);
   const freeze = useProgressStore((state) => state.freeze);
 
-  setFreeze();
+  useEffect(() => setFreeze(), [setFreeze]);
 
   const progressPercent = (completedDays.length / 24) * 100;
   const days = Array.from({ length: 24 }, (_, i) => i + 1);
