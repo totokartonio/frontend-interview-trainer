@@ -3,7 +3,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { IconMoodSad } from "@tabler/icons-react";
 import styles from "./NotFound.module.css";
 
-const NotFound = ({ message }: { message: string }) => {
+const NotFound = ({ message }: { message: string | undefined }) => {
   const navigate = useNavigate();
   const handleClick = () => {
     navigate({ to: "/" });
@@ -16,7 +16,7 @@ const NotFound = ({ message }: { message: string }) => {
           <IconMoodSad className={styles.sadIcon} size={36} />
           <Title order={2}> Упс!</Title>
         </Group>
-        <Text c="dimmed">{message}</Text>
+        <Text c="dimmed">{message || "Что-то пошло не так."}</Text>
         <Button onClick={handleClick} aria-label="На главную">
           На главную
         </Button>

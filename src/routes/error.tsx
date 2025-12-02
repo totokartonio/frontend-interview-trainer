@@ -1,8 +1,12 @@
-import { createFileRoute } from "@tanstack/react-router";
-import NotFound from "../components/NotFound.tsx/index.ts";
+import { createFileRoute, useSearch } from "@tanstack/react-router";
+import NotFound from "../components/NotFound.tsx";
+
+type SearchParams = {
+  message?: string;
+};
 
 const ErrorPage = () => {
-  const { message } = Route.useSearch();
+  const { message } = useSearch({ strict: false }) as SearchParams;
 
   return <NotFound message={message} />;
 };
