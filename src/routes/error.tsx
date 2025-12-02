@@ -1,5 +1,5 @@
 import { createFileRoute, useSearch } from "@tanstack/react-router";
-import NotFound from "../components/NotFound.tsx";
+import NotFound from "../components/NotFound/index.ts";
 
 type SearchParams = {
   message?: string;
