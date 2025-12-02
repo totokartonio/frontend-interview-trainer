@@ -1,4 +1,6 @@
-import { Stack, Progress, Title, Text } from "@mantine/core";
+import { Stack, Progress, Title, Text, Code } from "@mantine/core";
+import Markdown from "react-markdown";
+import { isBlock } from "../../../utils/isBlock";
 
 type Props = {
   question: string;
@@ -19,7 +21,20 @@ export const QuestionTitle = ({
       </Text>
       <Progress value={progressPercent} transitionDuration={400} />
       <Title order={1} fz="h3">
-        {question}
+        <Markdown
+          components={{
+            p: ({ node, ...props }) => (
+              <p style={{ marginBottom: 14 }} {...props} />
+            ),
+            code: ({ children }) => (
+              <Code block={isBlock(children)} style={{ fontSize: 16 }}>
+                {children}
+              </Code>
+            ),
+          }}
+        >
+          {question}
+        </Markdown>
       </Title>
     </Stack>
   );

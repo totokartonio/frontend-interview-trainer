@@ -4,34 +4,34 @@ import { useNavigate } from "@tanstack/react-router";
 import { useProgressStore } from "../../../store/progress";
 
 type Props = {
-  days: number[];
+  lessons: number[];
 };
 
-export const LessonsGrid = ({ days }: Props) => {
+export const LessonsGrid = ({ lessons }: Props) => {
   const navigate = useNavigate();
   const completedDays = useProgressStore((state) => state.completedLessons);
   const currentLesson = useProgressStore((state) => state.currentLesson);
-  const getDayClass = (dayNumber: number) => {
-    if (completedDays.includes(dayNumber)) return "completed";
-    if (dayNumber === currentLesson) return "current";
+  const getLessonClass = (lessonNumber: number) => {
+    if (completedDays.includes(lessonNumber)) return "completed";
+    if (lessonNumber === currentLesson) return "current";
     return "locked";
   };
 
   return (
     <Card shadow="sd" padding="lg">
       <SimpleGrid spacing="sm" cols={{ base: 5, sm: 10 }}>
-        {days.map((day) => {
+        {lessons.map((lesson) => {
           return (
             <UnstyledButton
-              className={`${styles.gridCard} ${styles[getDayClass(day)]}`}
-              key={day}
-              data-testid={`lesson-${day}`}
-              data-label={getDayClass(day)}
-              disabled={getDayClass(day) === "locked"}
-              onClick={() => navigate({ to: `/lesson/${day}` })}
+              className={`${styles.gridCard} ${styles[getLessonClass(lesson)]}`}
+              key={lesson}
+              data-testid={`lesson-${lesson}`}
+              data-label={getLessonClass(lesson)}
+              disabled={getLessonClass(lesson) === "locked"}
+              onClick={() => navigate({ to: `/lesson/${lesson}` })}
             >
               <Text size="sm" fw={600}>
-                {day}
+                {lesson}
               </Text>
             </UnstyledButton>
           );

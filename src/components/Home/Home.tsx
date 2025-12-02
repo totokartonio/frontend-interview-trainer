@@ -18,7 +18,7 @@ const Home = () => {
   useEffect(() => setFreeze(), [setFreeze]);
 
   const progressPercent = (completedDays.length / 24) * 100;
-  const days = Array.from({ length: 24 }, (_, i) => i + 1);
+  const lessons = Array.from({ length: course.totalLessons }, (_, i) => i + 1);
 
   const handleClick = () => {
     navigate({
@@ -36,7 +36,7 @@ const Home = () => {
         progressPercent={progressPercent}
         handleClick={handleClick}
       />
-      <LessonsGrid days={days} />
+      <LessonsGrid lessons={lessons} />
     </Stack>
   );
 };
