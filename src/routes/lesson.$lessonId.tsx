@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Lesson } from "../components/Lesson";
+import { Lesson } from "../components/Lesson/index.ts";
 import { useProgressStore } from "../store/progress";
 import loadOrRedirect from "../utils/loadOrRedirect.ts";
 

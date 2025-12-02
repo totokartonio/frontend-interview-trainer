@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useProgressStore } from "../store/progress";
 import loadOrRedirect from "../utils/loadOrRedirect.ts";
-import { Completion } from "../components/Completion";
+import { Completion } from "../components/Completion/index.ts";
 
 const CompletionPage = () => {
   const { lesson } = Route.useLoaderData();
