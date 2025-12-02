@@ -1,0 +1,67 @@
+.option {
+  border: 1px solid var(--mantine-color-blue-4);
+  border-radius: var(--mantine-radius-md);
+  padding: 16px 16px;
+  transition: all var(--duration-normal) ease;
+}
+
+.option:not(:disabled):hover {
+  background-color: var(--mantine-color-blue-0);
+  border-color: var(--mantine-color-blue-6);
+}
+
+.option:active {
+  transform: translateY(1px);
+}
+
+.correctAnswer {
+  background-color: var(--mantine-color-teal-0);
+  border: 1px solid var(--mantine-color-teal-4);
+  color: var(--mantine-color-teal-8);
+}
+.wrongAnswer {
+  background-color: var(--mantine-color-red-0);
+  border: 1px solid var(--mantine-color-red-4);
+  color: var(--mantine-color-red-8);
+}
+.lockedOption {
+  background-color: var(--mantine-color-gray-0);
+  border: 1px solid var(--mantine-color-gray-4);
+  color: var(--mantine-color-gray-6);
+}
+
+.correctAnswer:hover,
+.wrongAnswer:hover,
+.lockedOption:hover {
+  transform: none;
+}
+
+.explanation {
+  animation: fadeIn 0.4s cubic-bezier(0.12, 1.4, 0.64, 1);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.questionCard {
+  animation: quizFadeInUp 0.3s ease-out;
+}
+
+@keyframes quizFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateX(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

@@ -1,0 +1,51 @@
+.dayBadge {
+  padding: 12px 24px;
+  height: auto;
+}
+
+.flameIcon {
+  color: var(--mantine-color-orange-6);
+}
+
+.snowIcon {
+  color: var(--mantine-color-blue-4);
+}
+
+.gridCard {
+  border: none;
+  color: white;
+  border-radius: var(--mantine-radius-md);
+  padding: 15px 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all var(--duration-normal) ease;
+}
+
+.gridCard:active {
+  transform: translateY(1px);
+}
+
+.completed {
+  background-color: var(--mantine-color-teal-4);
+}
+
+.completed:hover {
+  background-color: var(--mantine-color-teal-5);
+}
+
+.current {
+  background-color: var(--mantine-color-blue-4);
+}
+
+.current:hover {
+  background-color: var(--mantine-color-blue-5);
+}
+
+.locked {
+  background-color: var(--mantine-color-gray-4);
+  color: var(--mantine-color-dark-2);
+}
+.locked:hover {
+  transform: none;
+}
