@@ -6,7 +6,11 @@ type Props = {
   questionsLength: number;
 };
 
-const QuestionTitle = ({ question, questionIndex, questionsLength }: Props) => {
+export const QuestionTitle = ({
+  question,
+  questionIndex,
+  questionsLength,
+}: Props) => {
   const progressPercent = ((questionIndex + 1) / questionsLength) * 100;
   return (
     <Stack gap="sm" p="md">
@@ -20,5 +24,3 @@ const QuestionTitle = ({ question, questionIndex, questionsLength }: Props) => {
     </Stack>
   );
 };
-
-export default QuestionTitle;

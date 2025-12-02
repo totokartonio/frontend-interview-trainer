@@ -8,7 +8,7 @@ type Props = {
   freeze: boolean;
 };
 
-const CourseHeader = ({ title, streak, freeze }: Props) => {
+export const CourseHeader = ({ title, streak, freeze }: Props) => {
   return (
     <Stack gap="lg" align="center">
       <Title order={1}>{title}</Title>
@@ -39,5 +39,3 @@ const CourseHeader = ({ title, streak, freeze }: Props) => {
     </Stack>
   );
 };
-
-export default CourseHeader;

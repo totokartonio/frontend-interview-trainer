@@ -15,7 +15,7 @@ type Props = {
   variant: "topics" | "keyPoints" | "practice";
 };
 
-const ContentCard = ({ data, variant }: Props) => {
+export const ContentCard = ({ data, variant }: Props) => {
   let cardTitle;
   let cardColor;
   let iconColor;
@@ -76,5 +76,3 @@ const ContentCard = ({ data, variant }: Props) => {
     </Card>
   );
 };
-
-export default ContentCard;

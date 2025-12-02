@@ -7,7 +7,7 @@ type Props = {
   passed: boolean;
 };
 
-const CompletionHeader = ({ streak, passed }: Props) => {
+export const CompletionHeader = ({ streak, passed }: Props) => {
   return (
     <Stack gap="xl" align="center">
       <Title order={1} ta="center">
@@ -34,5 +34,3 @@ const CompletionHeader = ({ streak, passed }: Props) => {
     </Stack>
   );
 };
-
-export default CompletionHeader;

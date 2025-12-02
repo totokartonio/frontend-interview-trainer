@@ -6,7 +6,7 @@ type Props = {
   text: string;
 };
 
-const Explanation = ({ text }: Props) => {
+export const Explanation = ({ text }: Props) => {
   return (
     <Alert
       title="Объяснение"
@@ -19,5 +19,3 @@ const Explanation = ({ text }: Props) => {
     </Alert>
   );
 };
-
-export default Explanation;

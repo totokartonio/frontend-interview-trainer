@@ -2,8 +2,8 @@ import { useReducer } from "react";
 import { Card, Text, Button, Stack, UnstyledButton } from "@mantine/core";
 import { type QuizQuestion } from "../../types/course";
 import styles from "./Quiz.module.css";
-import QuestionTitle from "./atoms/QuestionTitle";
-import Explanation from "./atoms/Explanation";
+import { QuestionTitle } from "./atoms/QuestionTitle";
+import { Explanation } from "./atoms/Explanation";
 
 interface QuizProps {
   questions: QuizQuestion[];
@@ -117,4 +117,4 @@ const Quiz = ({ questions, onComplete }: QuizProps) => {
   );
 };
 
-export default Quiz;
+export { Quiz };

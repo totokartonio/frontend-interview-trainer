@@ -25,4 +25,4 @@ const NotFound = ({ message }: { message: string | undefined }) => {
   );
 };
 
-export default NotFound;
+export { NotFound };

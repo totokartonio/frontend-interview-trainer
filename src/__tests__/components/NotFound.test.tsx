@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import NotFound from "../../components/NotFound/index.ts";
+import { NotFound } from "../../components/NotFound/NotFound";
 import { renderWithRouter } from "../test-utils";
 
 vi.mock("@tanstack/react-router", () => ({

@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import Quiz from "../components/Quiz";
+import { Quiz } from "../components/Quiz/Quiz.tsx";
 import { useNavigate } from "@tanstack/react-router";
 import { useProgressStore } from "../store/progress";
 import loadOrRedirect from "../utils/loadOrRedirect.ts";

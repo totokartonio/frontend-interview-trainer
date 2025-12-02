@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import { act, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import Home from "../../components/Home";
+import { Home } from "../../components/Home/Home";
 import { useProgressStore } from "../../store/progress";
 import { renderWithRouter } from "../test-utils";
 

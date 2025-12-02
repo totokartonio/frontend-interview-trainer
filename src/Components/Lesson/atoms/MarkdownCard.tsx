@@ -7,7 +7,7 @@ type Props = {
   data: string;
 };
 
-const MarkdownCard = ({ data }: Props) => {
+export const MarkdownCard = ({ data }: Props) => {
   return (
     <Card shadow="sd" padding="lg" withBorder className={styles["content"]}>
       <Stack gap="md">
@@ -36,5 +36,3 @@ const MarkdownCard = ({ data }: Props) => {
     </Card>
   );
 };
-
-export default MarkdownCard;

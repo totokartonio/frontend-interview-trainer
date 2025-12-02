@@ -1,9 +1,9 @@
 import { Card, Button, Stack } from "@mantine/core";
 import { type LessonType } from "../../types/course";
 import { useNavigate } from "@tanstack/react-router";
-import LessonHeader from "./atoms/LessonHeader";
-import ContentCard from "./atoms/ContentCard";
-import MarkdownCard from "./atoms/MarkdownCard";
+import { LessonHeader } from "./atoms/LessonHeader";
+import { ContentCard } from "./atoms/ContentCard";
+import { MarkdownCard } from "./atoms/MarkdownCard";
 
 interface LessonProps {
   lesson: LessonType;
@@ -46,4 +46,4 @@ const Lesson = ({ lesson }: LessonProps) => {
     </Card>
   );
 };
-export default Lesson;
+export { Lesson };

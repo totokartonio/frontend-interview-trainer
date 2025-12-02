@@ -2,7 +2,7 @@ import { Card, Text, Button, Stack } from "@mantine/core";
 import { useNavigate } from "@tanstack/react-router";
 import { useProgressStore } from "../../store/progress";
 import { type QuizStats } from "../../types/store";
-import CompletionHeader from "./atoms/CompletionHeader";
+import { CompletionHeader } from "./atoms/CompletionHeader";
 
 const Completion = ({ quizStats }: { quizStats: QuizStats }) => {
   const navigate = useNavigate();
@@ -31,4 +31,4 @@ const Completion = ({ quizStats }: { quizStats: QuizStats }) => {
   );
 };
 
-export default Completion;
+export { Completion };

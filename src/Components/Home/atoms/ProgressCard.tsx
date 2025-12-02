@@ -7,7 +7,7 @@ type Props = {
   handleClick: () => void;
 };
 
-const ProgressCard = ({
+export const ProgressCard = ({
   currentLesson,
   totalLessons,
   progressPercent,
@@ -29,5 +29,3 @@ const ProgressCard = ({
     </Card>
   );
 };
-
-export default ProgressCard;

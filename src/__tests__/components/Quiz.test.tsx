@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import { screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import Quiz from "../../components/Quiz";
+import { Quiz } from "../../components/Quiz/Quiz";
 import type { QuizQuestion } from "../../types/course";
 import { renderWithRouter } from "../test-utils";
 

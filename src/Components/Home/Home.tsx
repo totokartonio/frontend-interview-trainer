@@ -1,9 +1,9 @@
 import { Stack } from "@mantine/core";
 import { useNavigate } from "@tanstack/react-router";
 import { useProgressStore } from "../../store/progress";
-import CourseHeader from "./atoms/CourseHeader";
-import ProgressCard from "./atoms/ProgressCard";
-import LessonsGrid from "./atoms/LessonsGrid";
+import { CourseHeader } from "./atoms/CourseHeader";
+import { ProgressCard } from "./atoms/ProgressCard";
+import { LessonsGrid } from "./atoms/LessonsGrid";
 import { useEffect } from "react";
 
 const Home = () => {
@@ -41,4 +41,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export { Home };

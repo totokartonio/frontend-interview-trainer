@@ -7,7 +7,7 @@ type Props = {
   days: number[];
 };
 
-const LessonsGrid = ({ days }: Props) => {
+export const LessonsGrid = ({ days }: Props) => {
   const navigate = useNavigate();
   const completedDays = useProgressStore((state) => state.completedLessons);
   const currentLesson = useProgressStore((state) => state.currentLesson);
@@ -40,5 +40,3 @@ const LessonsGrid = ({ days }: Props) => {
     </Card>
   );
 };
-
-export default LessonsGrid;
