@@ -2,6 +2,7 @@ import { Card, Stack, Group, ThemeIcon, Title, Code } from "@mantine/core";
 import Markdown from "react-markdown";
 import { IconFileText } from "@tabler/icons-react";
 import styles from "../Lesson.module.css";
+import { isBlock } from "../../../utils/isBlock";
 
 type Props = {
   data: string;
@@ -27,7 +28,9 @@ export const MarkdownCard = ({ data }: Props) => {
             li: ({ node, ...props }) => (
               <li style={{ marginBottom: 8 }} {...props} />
             ),
-            code: ({ children }) => <Code block>{children}</Code>,
+            code: ({ children }) => (
+              <Code block={isBlock(children)}>{children}</Code>
+            ),
           }}
         >
           {data}
