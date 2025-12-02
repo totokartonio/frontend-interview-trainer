@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import { screen } from "@testing-library/react";
-import { Completion } from "../../components/Completion/Completion";
+import { Completion } from "../../components/Completion/Completion.tsx";
 import { useProgressStore } from "../../store/progress";
 import type { QuizStats } from "../../types/store";
 import { renderWithRouter } from "../test-utils";
