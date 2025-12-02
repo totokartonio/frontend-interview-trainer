@@ -11,7 +11,9 @@ type Props = {
 export const CourseHeader = ({ title, streak, freeze }: Props) => {
   return (
     <Stack gap="lg" align="center">
-      <Title order={1}>{title}</Title>
+      <Title order={1} ta="center">
+        {title}
+      </Title>
       <Badge
         className={`${streak > 0 && !freeze ? "streak-animate" : ""} ${styles.dayBadge}`}
         color={freeze ? "blue.1" : "orange.1"}
